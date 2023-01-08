@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
+
+/* ------------------------------------- */
+
+body {
+  background-color: rgb(25, 26, 32);
+  color: aliceblue;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* ------------------------------------- */
+
+.swiss {
+  width: 50px;
+  height: 50px;
+  animation: rotation 25s infinite linear;
+}
+
+.swiss:hover {
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(359deg);
+  }
+}
+
+/* ------------------------------------- */
+
+.navbar-z {
+  background: rgb(102, 30, 30);
+  background: linear-gradient(180deg, rgba(102, 30, 30, 1) 0%, rgba(102, 30, 30, 0.688) 100%);
+  font-weight: 600;
+}
+
+.navbar-x {
+  color: rgb(255, 255, 255);
+}
+
+.navbar-x:hover {
+  cursor: pointer;
+  color: rgb(223, 189, 16);
+  opacity: 0.8;
+}
+
+.navbar-x:active {
+  cursor: pointer;
+}
+
+/* ------------------------------------- */
+
+.lang {
+  width: 30px;
+  height: 30px;
+  margin-left: 10px;
+}
+
+.lang:hover {
+  cursor: pointer;
+  opacity: 0.5;
+}
+
+.lang:active {
+  padding: 1px;
+}
+
+/* ------------------------------------- */
+
+.kustuta {
+  width: 30px;
+  height: 30px;
+}
+
+.kustuta:hover {
+  cursor: pointer;
+  opacity: 0.5;
+}
+
+.kustuta:active {
+  padding: 1px;
+}

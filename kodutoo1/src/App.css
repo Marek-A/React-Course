@@ -1,0 +1,125 @@
+<<<<<<< Updated upstream
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  background-color: beige;
+}
+
+
+.kass {
+  position: absolute;
+  border: 1px;
+  padding: 1px;
+  margin: 2%;
+
+  height: 46vh;
+  width: 34vw;
+
+  right: 1px;
+
+  background-color: rgba(255, 255, 255, 0);
+
+}
+
+.kass:active {
+  position: absolute;
+  cursor: pointer;
+  border: 1px;
+  padding: 1px;
+  margin: 2%;
+
+  height: 36rem;
+  width: 44rem;
+
+  right: 1px;
+
+  background-color: rgba(255, 255, 255, 0);
+
+}
+
+#green-btn {
+  position: absolute;
+  font-size: 3vh;
+  border: 1px;
+  padding: 1px;
+  margin: 2%;
+
+  height: 10vh;
+  width: 15vw;
+
+  top: 30%;
+
+  background-color: rgb(23, 114, 23);
+  color: rgb(161, 160, 160);
+}
+
+#green-btn:hover {
+  height: 50vh;
+}
+
+#green-btn:active {
+  cursor: grab;
+  color: rgb(219, 219, 219);
+  background-color: rgb(64, 158, 64);
+}
+
+/* SININE TEKST */
+#blue-text {
+  position: absolute;
+  font-style: italic;
+  font-size: 3.9vw;
+  border: 1px;
+  padding: 1px;
+  margin: 2%;
+  top: 1%;
+  color: blue;
+}
+
+#blue-text:hover {
+  font-size: 4.9vw;
+}
+=======
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+>>>>>>> Stashed changes

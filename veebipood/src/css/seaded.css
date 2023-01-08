@@ -1,0 +1,29 @@
+#mode {
+
+    align-items: center;
+    display: flex;
+    margin: 1px;
+    padding: 10px;
+    -webkit-appearance: button;
+    appearance: button;
+    background-color: #fff000;
+    border-radius: 30px;
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 0;
+
+
+}
+
+#mode:hover {
+    outline: 0;
+    background: #db1414;
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.81), 0 5px 90px 0 rgb(19, 132, 181);
+}
+
+#mode:disabled {
+    filter: saturate(0.2) opacity(0.5);
+    -webkit-filter: saturate(0.2) opacity(0.5);
+    cursor: not-allowed;
+}
