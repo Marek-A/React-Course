@@ -67,7 +67,7 @@ const resources = {
       "Product name:": "Ürün adı: ",
       "Price:": "Fiyat: ",
       "Category:": "Kategori: ",
-      "Description:": "Açıklama: ",
+      "Description:": "Açıklamaa: ",
       "Product is available": "Ürün stokta mevcut",
     },
   },
