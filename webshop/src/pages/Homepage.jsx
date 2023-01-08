@@ -29,15 +29,15 @@ function Homepage() {
 
   return (
     <div>
-      <ToastContainer/>
+      <ToastContainer />
       {products.map((element) => (
         <div className="home-product" key={element.id}>
-          <img className="home-product-image" src={element.image} alt="" />
-          <div className="home-product-id">{t("Product ID:")}{element.id}</div>
-          <div className="home-product-name">{t("Product name:")}{element.name}</div>
-          <div className="home-product-price">{t("Price:")}{element.price} $</div>
           <div className="home-product-category">{t("Category:")}{element.category}</div>
+          <div className="home-product-name">{t("Product name:")}{element.name}</div>
           <div className="home-product-description">{t("Description:")}{element.description}</div>
+          <div className="home-product-id">{t("Product ID:")}{element.id}</div>
+          <img className="home-product-image" src={element.image} alt="" />
+          <div className="home-product-price">{t("Price:")}{element.price} $</div>
           <div className="home-product-activity">{t("Product is available")}{element.active}</div>
           <img
             className="home-add-to-cart"

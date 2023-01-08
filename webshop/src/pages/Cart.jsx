@@ -46,8 +46,6 @@ function Cart() {
   return (
 
     <div className="cart-top">
-      {cart.length > 0 && <Button variant="warning" onClick={emptyCart}>{t("Empty the cart")}</Button>}
-      {cart.length > 0 && <div>{cart.length} {t("unique products")}</div>}
       {cart.length === 0 && <div>{t("Shopping cart is empty")}</div>}
 
       {cart.map((element, index) =>
@@ -55,17 +53,19 @@ function Cart() {
           <img className="product-image" src={element.product.image} alt="" />
           <div className="product-name">{element.product.name}</div>
           <div className="product-price">{(element.product.price * element.quantity).toFixed(2)} $</div>
-          <img className="cart-button" src="/plus.png" onClick={() => increaseQuantity(index)} alt="plus" />
+          <div className="cart-button-container"><img className="cart-button" src="/plus.png" onClick={() => increaseQuantity(index)} alt="plus" /></div>
           <div className="product-quantity">{element.quantity} {t("quantity-of-products")}</div>
-          <img className="cart-button" src="/minus.png" onClick={() => decreaseQuantity(index)} alt="minus" />
+          <div className="cart-button-container"><img className="cart-button" src="/minus.png" onClick={() => decreaseQuantity(index)} alt="minus" /></div>
           <img className="cart-button" src="/trash.png" onClick={() => deleteProduct(index)} alt="trash" />
         </div>
       )}
 
-      <div className="cart-bottom">{t("Cart price:")} {calculateCartPrice()} $</div>
+      <div className="cart-bottom">{t("Cart price:")} {calculateCartPrice()} $ </div>
+      <div className="cart-bottom"> {cart.length > 0 && <div>{cart.length} {t("unique products")}</div>}</div>
+      <div className="cart-bottom"> {cart.length > 0 && <Button variant="warning" onClick={emptyCart}>{t("Empty the cart")}</Button>}</div></div>
+    
 
-      <div></div>
-    </div>
+
   )
 }
 
