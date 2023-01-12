@@ -1,14 +1,23 @@
 import "../css/Homepage.css";
-import productsFromFile from "../data/products.json";
+import config from "../data/config.json";
 import { ToastContainer, toast } from "react-toastify";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 function Homepage() {
 
   const { t } = useTranslation();
+  const [products, setProducts] = useState([])
 
-  const [products] = useState(productsFromFile);
+  useEffect(() => {
+    fetch(config.productsDbUrl1)
+      .then(res => res.json())
+      .then(json => setProducts(json));
+
+  }, []);
+
+
+  // const [products] = useState(productsFromFile);  // LocalStorage file 
 
   const addToCart = (clickedProduct) => {
     let cartBB = localStorage.getItem("cart");
@@ -52,42 +61,4 @@ function Homepage() {
 }
 export default Homepage;
 
-
-const itemContainerClass = "s-item";
-const imageClass = "s-item__image-img";
-const titleClass = "s-item__title";
-const priceClass = "s-item__price";
-
-const items = document.getElementsByClassName(itemContainerClass);
-
-const arr = [];
-
-Array.from(items).forEach((item) => {
-  const imgs = item.getElementsByClassName(imageClass);
-  if (imgs.length === 0) return;
-  const img = imgs[0];
-  const src = img.src;
-  if (!src) return;
-  let name = item.getElementsByClassName(titleClass)[0].textContent;
-  const description = name;
-  name = name.split(" ").slice(0, 3).join(" ");
-  const _price = item.getElementsByClassName(priceClass)[0].textContent;
-  let price = _price.split("$")[2]
-    ? _price.split("$")[2]
-    : _price.split("$")[1];
-  price = price.replace(/,(?=.*\.\d+)/g, "");
-  price = Number(price);
-
-  arr.push({
-    id: Math.floor(Math.random() * 89999999 + 10000000),
-    image: src,
-    name,
-    price,
-    description,
-    category: document.title.split(":")[0].trim(),
-    active: true,
-  });
-});
-
-console.log(JSON.stringify(arr));
 

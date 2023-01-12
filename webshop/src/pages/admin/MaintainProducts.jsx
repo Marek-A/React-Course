@@ -1,19 +1,31 @@
-import { useRef, useState } from "react";
-import productsFromFile from "../../data/products.json";
+import { useEffect, useRef, useState } from "react";
+import config from "../../data/config.json";
 import { ToastContainer, toast } from "react-toastify";
 import { Link } from 'react-router-dom';
 
 function MaintainProducts() {
-
+  const [products, setProducts] = useState([]);
   const searchedRef = useRef();
-  const [products, setProducts] = useState(productsFromFile);
+  const [DbProducts, setDbProducts] = useState([]);
+
+  useEffect(() => {
+    fetch(config.productsDbUrl1)
+      .then(res => res.json())
+      .then(json => {
+        setProducts(json)
+        setDbProducts(json);
+      });
+  }, []);
+
   const deleteProduct = (index) => {
     products.splice(index, 1);
     setProducts(products.slice());
     toast("Product deleted!", { "positsion": "top-right", "theme": "dark" });
   };
+
   const searchFromProducts = () => {
-    const result = productsFromFile.filter(element => element.name.toLowerCase().includes(searchedRef.current.value.toLowerCase()));
+    const result = DbProducts.filter(element =>
+      element.name.toLowerCase().includes(searchedRef.current.value.toLowerCase()));
     setProducts(result);
   }
 
@@ -21,7 +33,8 @@ function MaintainProducts() {
     <div>
       <ToastContainer />
 
-      <input ref={searchedRef} onChange={searchFromProducts} placeholder="Search here" type="text" />
+      <input ref={searchedRef} onChange={searchFromProducts}
+        placeholder="Search here" type="text" />
       <div>{products.lenght} products</div>
 
       {products.map((element, index) => (

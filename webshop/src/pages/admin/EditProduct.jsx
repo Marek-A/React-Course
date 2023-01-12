@@ -1,13 +1,16 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { useRef, useState } from "react";
-import productsFromFile from "../../data/products.json";
+import { useEffect, useRef, useState } from "react";
+import config from "../../data/config.json";
 
 
 function EditProduct() {
-  const { productId } = useParams(); //path="admin/edit-product/:productId" in App.js
+
+  const [DbProducts, setDbProducts] = useState([]); // peab olema kõige üleval muidu error
+
+  const { productId } = useParams();
   const [idUnique, setIdUnique] = useState(true);
-  const productFound = productsFromFile.find(element => element.id === Number(productId));
-  const index = productsFromFile.indexOf(productFound);
+  const productFound = DbProducts.find(element => element.id === Number(productId));
+  const index = DbProducts.indexOf(productFound);
   const idRef = useRef();
   const nameRef = useRef();
   const priceRef = useRef();
@@ -16,6 +19,16 @@ function EditProduct() {
   const descriptionRef = useRef();
   const activeRef = useRef();
   const navigate = useNavigate();
+
+
+  useEffect(() => {
+    fetch(config.productsDbUrl1)
+      .then(res => res.json())
+      .then(json => {
+        setDbProducts(json);
+      });
+  }, []);
+
   const changeProduct = () => {
     const updatedProduct = {
       "id": Number(idRef.current.value),
@@ -27,11 +40,11 @@ function EditProduct() {
       "active": activeRef.current.checked,
     }
     // .push(newProduct);
-    productsFromFile[index] = updatedProduct;
+    DbProducts[index] = updatedProduct;
     navigate("/admin/maintain-product");
   }
   const checkIdUniqueness = () => {
-    const found = productsFromFile.find(element => element.id === Number(idRef.current.value));
+    const found = DbProducts.find(element => element.id === Number(idRef.current.value));
     if (found === undefined) {
       setIdUnique(true);
     } else {

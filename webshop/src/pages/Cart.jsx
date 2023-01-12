@@ -1,14 +1,41 @@
-import { useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import "../css/Cart.css";
 import Button from 'react-bootstrap/Button';
-
 import { useTranslation } from "react-i18next";
 // import Button from '@mui/material/Button';
 
 function Cart() {
 
-  const { t } = useTranslation();
+  const searchedRef = useRef();
+  const searchFromParcelMachines = () => {
+    const result = DbparcelMachines.filter(element =>
+      element.NAME.toLowerCase().includes(searchedRef.current.value.toLowerCase())
 
+    );
+    setParcelMachines(result);
+  }
+
+  const { t } = useTranslation();
+  const [parcelMachines, setParcelMachines] = useState([]);
+  const [DbparcelMachines, setDbParcelMachines] = useState([]); //search function
+
+  useEffect(() => { //useEffect kui tulen lehele ja kohe toimub API päring
+    fetch('https://www.omniva.ee/locations.json')
+      .then(res => res.json())
+      .then(json => setParcelMachines(json))
+  }, []);
+
+  useEffect(() => { //Search function for pakiautomaat
+    fetch('https://www.omniva.ee/locations.json')
+      .then(res => res.json())
+      .then(json => {
+        setParcelMachines(json);
+        setDbParcelMachines(json);
+      })
+
+  }, []);
+
+  // -------------------------------------
   const [cart, updateCart] = useState(JSON.parse(localStorage.getItem("cart")) || []);
 
   const emptyCart = () => {
@@ -62,8 +89,45 @@ function Cart() {
 
       <div className="cart-bottom">{t("Cart price:")} {calculateCartPrice()} $ </div>
       <div className="cart-bottom"> {cart.length > 0 && <div>{cart.length} {t("unique products")}</div>}</div>
-      <div className="cart-bottom"> {cart.length > 0 && <Button variant="warning" onClick={emptyCart}>{t("Empty the cart")}</Button>}</div></div>
-    
+      <div className="cart-bottom"> {cart.length > 0 && <Button variant="warning" onClick={emptyCart}>{t("Empty the cart")}</Button>}</div>
+
+      <div className="parcel-container">
+        <input ref={searchedRef} onChange={searchFromParcelMachines} placeholder="Search for parcel here" type="text" /><br />
+        <select className="parcel-menu">
+          {parcelMachines
+            .filter(element => element.NAME !== "1. eelistus minu.omniva.ee-s",) // !==   - hüümärk tähendab seda et ta ei otsi seda elementi
+            .filter(element => element.A0_NAME === "EE") // === - 3 võrdusmärki filtreerib ja näitba ainult neid elemente
+            .map(element => <option key={element.NAME}>{element.NAME}</option>)}
+        </select>
+      </div>
+
+
+
+      <div>
+
+
+
+
+
+
+
+
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+
 
 
   )
