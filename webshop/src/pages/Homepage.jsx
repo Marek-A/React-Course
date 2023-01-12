@@ -53,41 +53,41 @@ function Homepage() {
 export default Homepage;
 
 
-// const itemContainerClass = "s-item";
-// const imageClass = "s-item__image-img";
-// const titleClass = "s-item__title";
-// const priceClass = "s-item__price";
+const itemContainerClass = "s-item";
+const imageClass = "s-item__image-img";
+const titleClass = "s-item__title";
+const priceClass = "s-item__price";
 
-// const items = document.getElementsByClassName(itemContainerClass);
+const items = document.getElementsByClassName(itemContainerClass);
 
-// const arr = [];
+const arr = [];
 
-// Array.from(items).forEach((item) => {
-//   const imgs = item.getElementsByClassName(imageClass);
-//   if (imgs.length === 0) return;
-//   const img = imgs[0];
-//   const src = img.src;
-//   if (!src) return;
-//   let name = item.getElementsByClassName(titleClass)[0].textContent;
-//   const description = name;
-//   name = name.split(" ").slice(0, 3).join(" ");
-//   const _price = item.getElementsByClassName(priceClass)[0].textContent;
-//   let price = _price.split("$")[2]
-//     ? _price.split("$")[2]
-//     : _price.split("$")[1];
-//   price = price.replace(/,(?=.*\.\d+)/g, "");
-//   price = Number(price);
+Array.from(items).forEach((item) => {
+  const imgs = item.getElementsByClassName(imageClass);
+  if (imgs.length === 0) return;
+  const img = imgs[0];
+  const src = img.src;
+  if (!src) return;
+  let name = item.getElementsByClassName(titleClass)[0].textContent;
+  const description = name;
+  name = name.split(" ").slice(0, 3).join(" ");
+  const _price = item.getElementsByClassName(priceClass)[0].textContent;
+  let price = _price.split("$")[2]
+    ? _price.split("$")[2]
+    : _price.split("$")[1];
+  price = price.replace(/,(?=.*\.\d+)/g, "");
+  price = Number(price);
 
-//   arr.push({
-//     id: Math.floor(Math.random() * 89999999 + 10000000),
-//     image: src,
-//     name,
-//     price,
-//     description,
-//     category: document.title.split(":")[0].trim(),
-//     active: true,
-//   });
-// });
+  arr.push({
+    id: Math.floor(Math.random() * 89999999 + 10000000),
+    image: src,
+    name,
+    price,
+    description,
+    category: document.title.split(":")[0].trim(),
+    active: true,
+  });
+});
 
-// console.log(JSON.stringify(arr));
+console.log(JSON.stringify(arr));
 
