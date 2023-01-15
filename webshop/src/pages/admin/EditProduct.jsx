@@ -39,7 +39,7 @@ function EditProduct() {
       "description": descriptionRef.current.value,
       "active": activeRef.current.checked,
     }
-    // .push(newProduct);
+
     DbProducts[index] = updatedProduct;
     navigate("/admin/maintain-product");
   }

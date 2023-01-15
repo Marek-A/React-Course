@@ -44,11 +44,18 @@
 /* .home-product-id {} */
 
 .home-product-name {
-    width: 100px;
+    width: 50%;
+}
+
+.home-product-description {
+    width: 250px;
+    height: 100px;
+    background-color: rgb(57, 58, 57);
+    border: 1px solid rgba(0, 0, 0, 0.681);
 }
 
 .home-product-price {
-    width: 100px;
+    width: 10%;
     font-weight: 600;
 }
 
@@ -58,7 +65,7 @@
 
 .home-product-activity {
     align-items: right;
-    width: 100px;
+    width: 50%;
     font-weight: 600;
 }
 

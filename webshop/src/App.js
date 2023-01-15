@@ -1,4 +1,5 @@
 import { Link, Route, Routes } from "react-router-dom";
+
 import "./App.css";
 import Homepage from "./pages/Homepage";
 import Cart from "./pages/Cart";
@@ -15,6 +16,7 @@ import MaintainCategory from "./pages/admin/MaintainCategory";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
+import NavDropdown from "react-bootstrap/NavDropdown";
 
 import { useTranslation } from "react-i18next";
 
@@ -42,9 +44,12 @@ function App() {
               {t("contact")}
             </Nav.Link>
           </Nav>
-          <Nav.Link className="navbar-x" as={Link} to="/admin">
-            {t("admin")}
-          </Nav.Link>
+          <NavDropdown title={t("Settings")} id="collasible-nav-dropdown">
+            <Nav.Link className="admin-drop" as={Link} to="/admin">
+              {t("admin")}
+            </Nav.Link>
+          </NavDropdown>
+
           <img
             className="lang"
             onClick={() => changeLang("en")}
@@ -70,7 +75,8 @@ function App() {
         <Route path="" element={<Homepage />} />
         <Route path="cart" element={<Cart />} />
         <Route path="shops" element={<Shops />} />
-        <Route path="single-product" element={<SingleProduct />} />
+        <Route path="single-product/:productId" element={<SingleProduct />} />
+
         <Route path="contact" element={<ContactUs />} />
 
         <Route path="admin" element={<AdminHome />} />

@@ -35,7 +35,7 @@ function MaintainProducts() {
 
       <input ref={searchedRef} onChange={searchFromProducts}
         placeholder="Search here" type="text" />
-      <div>{products.lenght} products</div>
+      <div>{products.length} products</div>
 
       {products.map((element, index) => (
         <div keys={element.id}>

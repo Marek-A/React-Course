@@ -25,6 +25,7 @@ const resources = {
       "Category:": "Category: ",
       "Description:": "Description: ",
       "Product is available": "Product is available",
+      Settings: "Settings",
     },
   },
   ee: {
@@ -47,6 +48,7 @@ const resources = {
       "Category:": "Kategooria: ",
       "Description:": "Lisainfo: ",
       "Product is available": "Toode on saadaval",
+      Settings: "Seaded",
     },
   },
   tr: {
@@ -69,6 +71,7 @@ const resources = {
       "Category:": "Kategori: ",
       "Description:": "Açıklama: ",
       "Product is available": "Ürün stokta mevcut",
+      Settings: "Ayarlar",
     },
   },
 };

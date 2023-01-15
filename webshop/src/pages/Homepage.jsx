@@ -1,13 +1,22 @@
 import "../css/Homepage.css";
 import config from "../data/config.json";
-import { ToastContainer, toast } from "react-toastify";
-import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router"
+import { useEffect, useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+
+
+
 
 function Homepage() {
 
   const { t } = useTranslation();
   const [products, setProducts] = useState([])
+  const navigate = useNavigate()
+  const handleClick = (productId) => {
+    navigate(`/single-product/${productId}`);
+  }
+
 
   useEffect(() => {
     fetch(config.productsDbUrl1)
@@ -46,6 +55,9 @@ function Homepage() {
           <div className="home-product-description">{t("Description:")}{element.description}</div>
           <div className="home-product-id">{t("Product ID:")}{element.id}</div>
           <img className="home-product-image" src={element.image} alt="" />
+
+          <button onClick={() => handleClick(element.id)}>More info about this product</button>
+
           <div className="home-product-price">{t("Price:")}{element.price} $</div>
           <div className="home-product-activity">{t("Product is available")}{element.active}</div>
           <img
@@ -56,9 +68,9 @@ function Homepage() {
           />
         </div>
       ))}
+
+
     </div>
   );
 }
 export default Homepage;
-
-
