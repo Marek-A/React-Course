@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import config from "../../data/config.json";
 
 
+
 function EditProduct() {
 
   const [DbProducts, setDbProducts] = useState([]); // peab olema kõige üleval muidu error
@@ -41,7 +42,13 @@ function EditProduct() {
     }
 
     DbProducts[index] = updatedProduct;
-    navigate("/admin/maintain-product");
+
+    fetch(config.productsDbUrl1, { "method": "PUT", "body": JSON.stringify(DbProducts) }) // editmiseks 
+      .then(() => {
+        navigate("/admin/maintain-product");
+
+      })
+
   }
   const checkIdUniqueness = () => {
     const found = DbProducts.find(element => element.id === Number(idRef.current.value));

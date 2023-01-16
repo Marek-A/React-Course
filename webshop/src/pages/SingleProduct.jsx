@@ -9,7 +9,7 @@ function SingleProduct() {
   const [product, setProduct] = useState({});
 
   useEffect(() => {
-    fetch(`${config.productsDbUrl1}/${productId}`)
+    fetch(`${config.productsDbUrl1}`)
       .then(res => res.json())
       .then(json => setProduct(json));
   }, [productId]);
@@ -20,8 +20,6 @@ function SingleProduct() {
       <div className="single-product-description">{product.description}</div>
       <div className="single-product-price">{product.price}</div>
       <img className="single-product-image" src={product.image} alt="" />
-
-
     </div>
   );
 }

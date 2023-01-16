@@ -20,7 +20,12 @@ function MaintainProducts() {
   const deleteProduct = (index) => {
     products.splice(index, 1);
     setProducts(products.slice());
-    toast("Product deleted!", { "positsion": "top-right", "theme": "dark" });
+    fetch(config.productsDbUrl1, { "method": "PUT", "body": JSON.stringify(DbProducts) }) // editmiseks 
+      .then(() => {
+        toast.error("Product deleted!", { "positsion": "top-right", "theme": "dark" });
+      })
+
+
   };
 
   const searchFromProducts = () => {

@@ -1,8 +1,8 @@
 import { useEffect, useState, useRef } from 'react';
+import { ToastContainer, toast } from "react-toastify";
 import config from "../../data/config.json";
 
 function AddProduct() {
-    const [DbProducts, setDbProducts] = useState([]);
 
     const idRef = useRef();
     const nameRef = useRef();
@@ -12,10 +12,11 @@ function AddProduct() {
     const descriptionRef = useRef();
     const activeRef = useRef();
     const [idUnique, setIdUnique] = useState(true);
-
+    const [DbProducts, setDbProducts] = useState([]);
+    const [categories, setCategories] = useState([]);
 
     useEffect(() => {
-        fetch(config.productsDbUrl1)
+        fetch(config.productsDbUrl1) // võtmiseks
             .then(res => res.json())
             .then(json => {
                 setDbProducts(json);
@@ -35,6 +36,17 @@ function AddProduct() {
 
 
         DbProducts.push(newProduct);
+        fetch(config.productsDbUrl1, { "method": "PUT", "body": JSON.stringify(DbProducts) }) // lisamiseks 
+            .then(() => {
+                toast.success("Toode lisatud!", { "position": "top-right", "theme": "dark" });
+                idRef.current.value = "";
+                nameRef.current.value = "";
+                priceRef.current.value = "";
+                imageRef.current.value = "";
+                categoryRef.current.value = "";
+                descriptionRef.current.value = "";
+                activeRef.current.value = false;
+            })
 
 
     }
@@ -47,10 +59,16 @@ function AddProduct() {
         }
     }
 
+    fetch(config.categoriesDbUrl1)
+        .then(res => res.json())
+        .then(json => setCategories(json || []));
+
+
     return (
         <div>
 
             <div>
+                <ToastContainer />
                 {idUnique === false && <div>ID not unique!</div>}
                 <label>ID:</label><br />
                 <input ref={idRef} onChange={checkIdUniqueness} defaultValue={DbProducts.id} type="number" /> <br />
@@ -61,7 +79,12 @@ function AddProduct() {
                 <label>Image:</label><br />
                 <input ref={imageRef} type="text" /><br />
                 <label>Category:</label><br />
-                <input ref={categoryRef} type="text" /><br />
+                {/* <input ref={categoryRef} type="text" /><br /> */}
+
+                <select ref={categoryRef}>
+                    {categories.map(element => <option>{element.name}</option>)}
+                </select><br />
+
                 <label>Description:</label><br />
                 <input ref={descriptionRef} type="text" /><br />
                 <label>Active:</label><br />

@@ -19,6 +19,9 @@ export default function AdminHome() {
         <Button variant="primary">{t("Maintain products")}</Button>
       </Link>
 
+      <Link to="/admin/maintain-category">
+        <Button variant="primary">{t("Maintain categories")}</Button>
+      </Link>
 
 
     </div>

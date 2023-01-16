@@ -12,19 +12,21 @@ function Homepage() {
 
   const { t } = useTranslation();
   const [products, setProducts] = useState([])
+  const [DbProducts, SetDbProducts] = useState([]);
+
   const navigate = useNavigate()
   const handleClick = (productId) => {
     navigate(`/single-product/${productId}`);
   }
-
-
   useEffect(() => {
     fetch(config.productsDbUrl1)
       .then(res => res.json())
-      .then(json => setProducts(json));
+      .then(json => {
+        SetDbProducts(json)
+        setProducts(json);
+      });
 
   }, []);
-
 
   // const [products] = useState(productsFromFile);  // LocalStorage file 
 
@@ -42,11 +44,31 @@ function Homepage() {
     localStorage.setItem("cart", cartBB);
     toast(t("added-to-cart"), { "positsion": "top-right", "theme": "dark" });
   };
+  // const categories = ["Backpacks", "Glasses", "boots", "HEHEH"]
 
+  const categories = [...new Set(DbProducts.map(element => element.category))];
 
+  const filterByCategory = (categoryClicked) => {
+    const result = DbProducts.filter(element => element.category === categoryClicked)
+    setProducts(result);
+  }
 
   return (
     <div>
+
+      <button>Sorteeri AZ - kodus</button>
+      <button>Sorteeri ZA - kodus</button>
+      <button>Sorteeri price increasing - kodus</button>
+      <button>Sorteeri price decreasing - kodus</button>
+      <br />
+      <div>
+        {products.length} products
+      </div>
+      {/* <button onClick={() => filterByCategory("Backpacks")}>Backpacks</button>
+      <button onClick={() => filterByCategory("Glasses")}>Eyewear</button>
+      <button onClick={() => filterByCategory("boots")}>Footwear</button> */}
+      {categories.map(element => <button onClick={() => filterByCategory(element)}>{element}</button>)}
+
       <ToastContainer />
       {products.map((element) => (
         <div className="home-product" key={element.id}>
@@ -55,9 +77,7 @@ function Homepage() {
           <div className="home-product-description">{t("Description:")}{element.description}</div>
           <div className="home-product-id">{t("Product ID:")}{element.id}</div>
           <img className="home-product-image" src={element.image} alt="" />
-
           <button onClick={() => handleClick(element.id)}>More info about this product</button>
-
           <div className="home-product-price">{t("Price:")}{element.price} $</div>
           <div className="home-product-activity">{t("Product is available")}{element.active}</div>
           <img
