@@ -1,18 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
 
+* {
+  font-family: 'Poppins', sans-serif;
+}
+
 
 .map {
   height: 500px;
-  width: 500px;
+  width: 1000px;
 }
 
 /* ------------------------------------- */
 
-body {
-  background-color: rgb(25, 26, 32);
-  color: aliceblue;
-  font-family: 'Poppins', sans-serif;
-}
 
 /* ------------------------------------- */
 
@@ -40,8 +39,7 @@ body {
 /* ------------------------------------- */
 
 .navbar-z {
-  background: rgb(102, 30, 30);
-  background: linear-gradient(180deg, rgba(102, 30, 30, 1) 0%, rgba(102, 30, 30, 0.688) 100%);
+  background: rgb(51, 103, 118);
   font-weight: 600;
 }
 

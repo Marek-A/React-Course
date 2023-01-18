@@ -24,6 +24,44 @@ function AddProduct() {
     }, []);
 
     const addProduct = () => {
+        if (idRef.current.value === "") {
+            toast.error("ID is missing!", { "position": "top-left", "theme": "dark" });
+            return;
+        }
+        if (nameRef.current.value === "") {
+            toast.error("Name is missing!", { "position": "top-left", "theme": "dark" });
+            return;
+        }
+        if (nameRef.current.value.charAt(0).toLowerCase() === nameRef.current.value.charAt(0)) {
+            toast.error("Name must start with uppercase!", { "position": "top-left", "theme": "dark" });
+            return;
+        }
+        if (imageRef.current.value === "") {
+            toast.error("Image is missing!", { "position": "top-left", "theme": "dark" });
+            return;
+        }
+        if (imageRef.current.value.replaceAll(" ", "") !== imageRef.current.value) {
+            toast.error("Image is missing!", { "position": "top-left", "theme": "dark" });
+            return;
+        }
+
+        if (priceRef.current.value === "") {
+            toast.error("Price is missing!", { "position": "top-left", "theme": "dark" });
+            return;
+        }
+        if (categoryRef.current.value === "") {
+            toast.error("Category is missing!", { "position": "top-left", "theme": "dark" });
+            return;
+        }
+        if (descriptionRef.current.value === "") {
+            toast.error("Description is missing!", { "position": "top-left", "theme": "dark" });
+            return;
+        }
+        if (activeRef.current.value === "") {
+            toast.error("Active status is missing!", { "position": "top-left", "theme": "dark" });
+            return;
+        }
+
         const newProduct = {
             id: Number(idRef.current.value),
             name: nameRef.current.value,
@@ -31,7 +69,7 @@ function AddProduct() {
             image: imageRef.current.value,
             category: categoryRef.current.value,
             description: descriptionRef.current.value,
-            active: activeRef.current.checked
+            active: activeRef.current.checked,
         }
 
 

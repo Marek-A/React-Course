@@ -1,11 +1,12 @@
-import { useEffect, useState, useRef } from "react";
 import "../css/Cart.css";
+import { useEffect, useState, useRef } from "react";
 import Button from 'react-bootstrap/Button';
+import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-// import Button from '@mui/material/Button';
+import Spinner from 'react-bootstrap/Spinner';
 
 function Cart() {
-
+  const [isLoading, setLoading] = useState(true);
   const searchedRef = useRef();
   const searchFromParcelMachines = () => {
     const result = DbparcelMachines.filter(element =>
@@ -22,17 +23,11 @@ function Cart() {
   useEffect(() => { //useEffect kui tulen lehele ja kohe toimub API päring
     fetch('https://www.omniva.ee/locations.json')
       .then(res => res.json())
-      .then(json => setParcelMachines(json))
-  }, []);
-
-  useEffect(() => { //Search function for pakiautomaat
-    fetch('https://www.omniva.ee/locations.json')
-      .then(res => res.json())
       .then(json => {
         setParcelMachines(json);
         setDbParcelMachines(json);
+        setLoading(false);
       })
-
   }, []);
 
   // -------------------------------------
@@ -92,40 +87,68 @@ function Cart() {
       .then(json => window.location.href = json.payment_link);
   }
 
+
+  //---------LOADER BEFORE RETURN--------------
+  if (isLoading === true) {
+    return (<Spinner animation="grow" variant="dark" />
+    )
+  }
+
   return (
+    <div>{cart.length === 0 && <div>{t("Shopping cart is empty")}</div>}
+      <div>
+        <div className="cart-page-main-container">
+          <div className="cart-top-btn"> {cart.length > 0 && <Button variant="primary" as={Link} to="/">{t("Continue shopping")}</Button>}{cart.length > 0 && <Button variant="danger" onClick={emptyCart}>{t("Empty the cart")}</Button>}</div>
+          {cart.map((element, index) =>
+            <div key={element.product.id}>
 
-    <div className="cart-top">
-      {cart.length === 0 && <div>{t("Shopping cart is empty")}</div>}
+              <div className="cart-card-container">
+                <img className="image" src={element.product.image} alt="" />
+                <div className="name">{element.product.name}</div>
+                <div className="price">{(element.product.price * element.quantity).toFixed(2)} $</div>
+                <div className="cart-product-quantity">{element.quantity} {t("quantity-of-products")}</div>
+                <img className="cart-button" src="/plus.png" onClick={() => increaseQuantity(index)} alt="plus" />
+                <img className="cart-button" src="/minus.png" onClick={() => decreaseQuantity(index)} alt="minus" />
+                <img className="cart-button" src="/trash.png" onClick={() => deleteProduct(index)} alt="trash" />
+              </div>
+            </div>
 
-      {cart.map((element, index) =>
-        <div key={element.product.id} className="product">
-          <img className="product-image" src={element.product.image} alt="" />
-          <div className="product-name">{element.product.name}</div>
-          <div className="product-price">{(element.product.price * element.quantity).toFixed(2)} $</div>
-          <div className="cart-button-container"><img className="cart-button" src="/plus.png" onClick={() => increaseQuantity(index)} alt="plus" /></div>
-          <div className="product-quantity">{element.quantity} {t("quantity-of-products")}</div>
-          <div className="cart-button-container"><img className="cart-button" src="/minus.png" onClick={() => decreaseQuantity(index)} alt="minus" /></div>
-          <img className="cart-button" src="/trash.png" onClick={() => deleteProduct(index)} alt="trash" />
+
+          )}
+          <div className="cart-page-bottom-container">
+            <div className="cart-checkout">
+
+              <div className="cart-parcel-container">
+                <input className="searchbar" ref={searchedRef} onChange={searchFromParcelMachines} placeholder="Search for parcel machine" type="text" /><br />
+                {/* <textarea className="cart-additional-info" placeholder="Additional information..." name="message" /> */}
+                <select className="searchresult">
+                  {parcelMachines
+                    .filter(element => element.NAME !== "1. eelistus minu.omniva.ee-s",) // !==   - hüümärk tähendab seda et ta ei otsi seda elementi
+                    .filter(element => element.A0_NAME === "EE") // === - 3 võrdusmärki filtreerib ja näitba ainult neid elemente
+                    .map(element => <option key={element.NAME}>{element.NAME}</option>)}
+                </select>
+              </div>
+              <div className="cart-checkout-container">
+                <div>{t("Cart price:")} {calculateCartPrice()} $ </div>
+                <div> {cart.length > 0 && <div>{cart.length} {t("unique products")}</div>}
+                </div>
+                <Button variant="success" onClick={pay}>Checkout & Pay</Button>
+
+              </div>
+
+            </div>
+
+          </div>
+
         </div>
-      )}
 
-      <div className="cart-bottom">{t("Cart price:")} {calculateCartPrice()} $ </div>
-      <div className="cart-bottom"> {cart.length > 0 && <div>{cart.length} {t("unique products")}</div>}</div>
-      <div className="cart-bottom"> {cart.length > 0 && <Button variant="warning" onClick={emptyCart}>{t("Empty the cart")}</Button>}</div>
-      <button onClick={pay}>Pay</button>
-      <div className="parcel-container">
-        <input ref={searchedRef} onChange={searchFromParcelMachines} placeholder="Search for parcel here" type="text" /><br />
-        <select className="parcel-menu">
-          {parcelMachines
-            .filter(element => element.NAME !== "1. eelistus minu.omniva.ee-s",) // !==   - hüümärk tähendab seda et ta ei otsi seda elementi
-            .filter(element => element.A0_NAME === "EE") // === - 3 võrdusmärki filtreerib ja näitba ainult neid elemente
-            .map(element => <option key={element.NAME}>{element.NAME}</option>)}
-        </select>
       </div>
-    </div>
 
-
+    </div >
   )
 }
 
+// 150 + RIDA HAKKAME MÕTLEMA VÄLJATÕSTIMISE PEALE
+// 200 RIDA TÕSTMAE VÄLJA
+// ET OLEKS ILUSAM JA VÄHEM KEERULISEM
 export default Cart

@@ -12,7 +12,7 @@ export default function AdminHome() {
 
 
       <Link to="/admin/add-product">
-        <Button variant="danger">{t("Add product")}</Button>
+        <Button variant="success">{t("Add product")}</Button>
       </Link>
 
       <Link to="/admin/maintain-product">
@@ -20,7 +20,11 @@ export default function AdminHome() {
       </Link>
 
       <Link to="/admin/maintain-category">
-        <Button variant="primary">{t("Maintain categories")}</Button>
+        <Button variant="warning">{t("Maintain categories")}</Button>
+      </Link>
+
+      <Link to="/admin/maintain-shops">
+        <Button variant="info">{t("Maintain shops")}</Button>
       </Link>
 
 

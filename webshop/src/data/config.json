@@ -1,4 +1,5 @@
 {
   "productsDbUrl1": "https://mil-gear-shop-default-rtdb.europe-west1.firebasedatabase.app/products.json/",
-  "categoriesDbUrl1": "https://mil-gear-shop-default-rtdb.europe-west1.firebasedatabase.app/categories.json/"
+  "categoriesDbUrl1": "https://mil-gear-shop-default-rtdb.europe-west1.firebasedatabase.app/categories.json/",
+  "shopsDbUrl1": "https://mil-gear-shop-default-rtdb.europe-west1.firebasedatabase.app/shops.json/"
 }

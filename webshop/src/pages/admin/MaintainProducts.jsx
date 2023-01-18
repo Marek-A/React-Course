@@ -2,18 +2,23 @@ import { useEffect, useRef, useState } from "react";
 import config from "../../data/config.json";
 import { ToastContainer, toast } from "react-toastify";
 import { Link } from 'react-router-dom';
+import Spinner from 'react-bootstrap/Spinner';
+import "../../css/MaintainProducts.css";
+
 
 function MaintainProducts() {
   const [products, setProducts] = useState([]);
   const searchedRef = useRef();
   const [DbProducts, setDbProducts] = useState([]);
+  const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
     fetch(config.productsDbUrl1)
       .then(res => res.json())
       .then(json => {
         setProducts(json)
-        setDbProducts(json);
+        setDbProducts(json)
+        setLoading(false);
       });
   }, []);
 
@@ -34,6 +39,11 @@ function MaintainProducts() {
     setProducts(result);
   }
 
+  if (isLoading === true) {
+    return (<Spinner animation="grow" variant="dark" />
+    )
+  }
+
   return (
     <div>
       <ToastContainer />
@@ -43,7 +53,7 @@ function MaintainProducts() {
       <div>{products.length} products</div>
 
       {products.map((element, index) => (
-        <div keys={element.id}>
+        <div keys={element.id} className={element.active === true ? "active" : "inactive"}>
           <img src={element.image} alt="" />
           <div>{element.id}</div>
           <div>{element.name}</div>
