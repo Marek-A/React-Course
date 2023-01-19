@@ -1,11 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
 
-body {
-    background-color: rgb(99, 92, 83);
-}
-
 .cart-page-main-container {
-    background-color: rgb(50, 52, 54);
+    background-color: rgb(48, 49, 50);
     font-family: 'Poppins', sans-serif;
     margin-left: auto;
     margin-right: 0;
@@ -20,7 +16,7 @@ body {
 }
 
 .cart-card-container {
-    background-color: rgb(53, 72, 88);
+    background-color: rgb(21, 68, 103);
     display: flex;
     align-items: center;
     justify-content: space-evenly;

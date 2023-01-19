@@ -1,0 +1,23 @@
+{
+  "translation": {
+    "admin": "Admin view",
+    "shops": "Our shops",
+    "contact": "Contact us",
+    "cart": "Shopping cart",
+    "added-to-cart": "Added to basket!",
+    "Empty the cart": "Empty the cart",
+    "Cart price:": "Cart price:",
+    "Shopping cart is empty": "Shopping cart is empty",
+    "Add product": "Add products",
+    "Maintain products": "Maintain products",
+    "unique products": "unique products",
+    "quantity-of-products": "pieces",
+    "Product ID:": "Product ID: ",
+    "Product name:": "Name: ",
+    "Price:": "Price: ",
+    "Category:": "Category: ",
+    "Description:": "Description: ",
+    "Product is available": "Product is available",
+    "Settings": "Settings"
+  }
+}

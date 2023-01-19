@@ -1,11 +1,20 @@
+// import styles from "../css/Cart.module.css";
 import "../css/Cart.css";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useContext, useState, useRef } from "react";
 import Button from 'react-bootstrap/Button';
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import Spinner from 'react-bootstrap/Spinner';
+import Payment from "../components/cart/Payment";
+import CartSumContext from "../store/CartSumContext";
 
 function Cart() {
+  const { t } = useTranslation();
+  const [parcelMachines, setParcelMachines] = useState([]);
+  const [DbparcelMachines, setDbParcelMachines] = useState([]); //search function
+  //------------------------------------------------------- cartSumCtx below
+  const cartSumCtx = useContext(CartSumContext);
+  //-------------------------------------------------------
   const [isLoading, setLoading] = useState(true);
   const searchedRef = useRef();
   const searchFromParcelMachines = () => {
@@ -15,10 +24,6 @@ function Cart() {
     );
     setParcelMachines(result);
   }
-
-  const { t } = useTranslation();
-  const [parcelMachines, setParcelMachines] = useState([]);
-  const [DbparcelMachines, setDbParcelMachines] = useState([]); //search function
 
   useEffect(() => { //useEffect kui tulen lehele ja kohe toimub API päring
     fetch('https://www.omniva.ee/locations.json')
@@ -30,62 +35,51 @@ function Cart() {
       })
   }, []);
 
-  // -------------------------------------
   const [cart, updateCart] = useState(JSON.parse(localStorage.getItem("cart")) || []);
-
+  //------------------------------------------------------- cartSumCtx below
   const emptyCart = () => {
     updateCart([]);
     localStorage.setItem("cart", JSON.stringify([]));
+    cartSumCtx.setCartSum(0);
   }
+  //-------------------------------------------------------
   const deleteProduct = (i) => {
     cart.splice(i, 1);
     updateCart(cart.slice());
     localStorage.setItem("cart", JSON.stringify(cart));
-  }
-
-  const calculateCartPrice = () => {
-    let allPrice = 0;
-    cart.forEach(element => allPrice = allPrice + element.product.price * element.quantity);
-    return allPrice.toFixed(2);
-  }
-
-  const decreaseQuantity = (index) => {
-    cart[index].quantity = cart[index].quantity - 1;
-    if (cart[index].quantity === 0) {
-      deleteProduct(index);
-    }
-    updateCart(cart.slice());
-    localStorage.setItem("cart", JSON.stringify(cart));
+    cartSumCtx.setCartSum(calculateCartPrice());
   }
 
   const increaseQuantity = (index) => {
     cart[index].quantity = cart[index].quantity + 1;
     updateCart(cart.slice());
     localStorage.setItem("cart", JSON.stringify(cart));
+    cartSumCtx.setCartSum(calculateCartPrice());
   }
 
-  const pay = () => {
-    const paymentUrl = "https://igw-demo.every-pay.com/api/v4/payments/oneoff";
-    const paymentData = {
+  const decreaseQuantity = (index) => {
+    cart[index].quantity = cart[index].quantity - 1;
+    if (cart[index].quantity === 0) {
+      deleteProduct(index);
+      cartSumCtx.setCartSum(calculateCartPrice());
+    }
 
-      "api_username": "92ddcfab96e34a5f", // NEED VAJA MUUTA KUI OMA KONTO SAAN
-      "account_name": "EUR3D1",
-      "amount": calculateCartPrice(),
-      "order_reference": Math.random() * 9999,
-      "nonce": "m1293a" + new Date() + Math.random() * 9999,
-      "timestamp": new Date(),
-      "customer_url": "https://milygear.web.app/"
-
-    };
-    const paymentHeaders = {
-      "Authorization": "Basic OTJkZGNmYWI5NmUzNGE1Zjo4Y2QxOWU5OWU5YzJjMjA4ZWU1NjNhYmY3ZDBlNGRhZA==", // NEED VAJA MUUTA KUI OMA KONTO SAAN
-      "Content-Type": "application/json"
-    };
-
-    fetch(paymentUrl, { "method": "POST", "body": JSON.stringify(paymentData), "headers": paymentHeaders })
-      .then(res => res.json())
-      .then(json => window.location.href = json.payment_link);
+    updateCart(cart.slice());
+    localStorage.setItem("cart", JSON.stringify(cart));
+    cartSumCtx.setCartSum(calculateCartPrice());
   }
+
+  const calculateCartPrice = () => {
+    let cartsum = 0;
+    cart.forEach(element => cartsum = cartsum + element.product.price * element.quantity);
+    return cartsum.toFixed(2);
+  }
+
+
+
+
+
+
 
 
   //---------LOADER BEFORE RETURN--------------
@@ -131,8 +125,9 @@ function Cart() {
               <div className="cart-checkout-container">
                 <div>{t("Cart price:")} {calculateCartPrice()} $ </div>
                 <div> {cart.length > 0 && <div>{cart.length} {t("unique products")}</div>}
+                  <Payment sum={calculateCartPrice()} />
                 </div>
-                <Button variant="success" onClick={pay}>Checkout & Pay</Button>
+
 
               </div>
 

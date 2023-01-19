@@ -1,19 +1,24 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
-
 * {
   font-family: 'Poppins', sans-serif;
 }
 
+body {
+  background-color: rgb(48, 49, 50);
+  margin: 0;
+  padding: 0;
+  color: aliceblue;
+}
+
+.carousel {
+  width: 500px;
+  margin: auto;
+
+}
 
 .map {
   height: 500px;
   width: 1000px;
 }
-
-/* ------------------------------------- */
-
-
-/* ------------------------------------- */
 
 .swiss {
   width: 50px;
@@ -39,7 +44,7 @@
 /* ------------------------------------- */
 
 .navbar-z {
-  background: rgb(51, 103, 118);
+  background: #1f1f1f;
   font-weight: 600;
 }
 
@@ -49,7 +54,7 @@
 
 .navbar-x:hover {
   cursor: pointer;
-  color: rgb(223, 189, 16);
+  color: rgb(223, 61, 16);
   opacity: 0.8;
 }
 
@@ -58,7 +63,7 @@
 }
 
 .admin-drop {
-  color: black;
+  color: rgb(0, 0, 0);
 }
 
 /* ------------------------------------- */

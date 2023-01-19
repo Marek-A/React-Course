@@ -1,0 +1,23 @@
+{
+  "translation": {
+    "admin": "Admin vaade",
+    "shops": "Meie poed",
+    "contact": "Meie kontakt",
+    "cart": "Ostukorv",
+    "added-to-cart": "Ostukorvi lisatud!",
+    "Empty the cart": "Tühjenda ostukorv",
+    "Cart price:": "Ostukorvi hind:",
+    "Shopping cart is empty": "Ostukorv on tühi",
+    "Add product": "Lisa tooteid",
+    "Maintain products": "Muuda tooteid",
+    "unique products": "erinevat toodet",
+    "quantity-of-products": "tükki",
+    "Product ID:": "Tootekood: ",
+    "Product name:": "Nimetus: ",
+    "Price:": "Hind: ",
+    "Category:": "Kategooria: ",
+    "Description:": "Lisainfo: ",
+    "Product is available": "Toode on saadaval",
+    "Settings": "Seaded"
+  }
+}

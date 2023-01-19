@@ -2,9 +2,15 @@ import "../css/Homepage.css";
 import config from "../data/config.json";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router"
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import Spinner from 'react-bootstrap/Spinner';
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
+import Button from 'react-bootstrap/Button';
+import CartSumContext from "../store/CartSumContext";
+import CarouselGallery from "../components/home/CarouselGallery";
+
 
 function Homepage() {
   //-----------------------------------------------------------------------------
@@ -15,6 +21,8 @@ function Homepage() {
   const categories = [...new Set(DbProducts.map(element => element.category))];
   const [sort, setSort] = useState("A-Z");
   const [isLoading, setLoading] = useState(true);
+  //-----------------------------------------------------------------------------
+  const cartSumCtx = useContext(CartSumContext);
   //-----------------------------------------------------------------------------
   const handleClick = (productId) => {
     navigate(`/single-product/${productId}`);
@@ -39,6 +47,10 @@ function Homepage() {
     } else {
       cartBB.push({ "product": clickedProduct, "quantity": 1 });
     }
+    let cartsum = 0;
+    cartBB.forEach(element => cartsum = cartsum + element.product.price * element.quantity);
+    cartSumCtx.setCartSum(cartsum.toFixed(2));
+
     cartBB = JSON.stringify(cartBB);
     localStorage.setItem("cart", cartBB);
     toast(t("added-to-cart"), { "positsion": "top-right", "theme": "dark" });
@@ -85,34 +97,43 @@ function Homepage() {
   }
 
   return (
-    <div className="webshop-container">
-      <div>
-        <div> {products.length} products</div>
-        <button onClick={resetFilters}>Reset Filters</button>
-        <button onClick={() => { setSort("A-Z"); sortProducts(); }}>Sort A-Z</button>
-        <button onClick={() => { setSort("Z-A"); sortProducts(); }}>Sort Z-A</button>
-        <button onClick={() => { setSort("Price increasing"); sortProducts(); }}>Sort Price Increasing</button>
-        <button onClick={() => { setSort("Price decreasing"); sortProducts(); }}>Sort Price Decreasing</button>
-        <button onClick={showAllProducts}>Show All Products</button>
-        {categories.map(element => <button onClick={() => filterByCategory(element)}>{element}</button>)}
+    <div>
+      <CarouselGallery />
+      <div> {products.length}{t(" products on display")}</div>
+      <div className="filter-container">
+        {categories.map(element =>
+          <Button variant="warning" onClick={() => filterByCategory(element)}>{element}</Button>)}
+
+        <DropdownButton variant="success" title="Filter products">
+          <Dropdown.Menu>
+            <button onClick={resetFilters}>{t("Reset Filters")}</button>
+            <button onClick={() => { setSort("A-Z"); sortProducts(); }}>{t("Sort A-Z")}</button>
+            <button onClick={() => { setSort("Z-A"); sortProducts(); }}>{t("Sort Z-A")}</button>
+            <button onClick={() => { setSort("Price increasing"); sortProducts(); }}>{t("Sort Price Increasing")}</button>
+            <button onClick={() => { setSort("Price decreasing"); sortProducts(); }}>{t("Sort Price Decreasing")}</button>
+            <button onClick={showAllProducts}>{t("Show All Products")}</button>
+          </Dropdown.Menu>
+        </DropdownButton>
       </div>
 
-      <ToastContainer />
-      {products.map((element) => (
-        <div className="product-card" key={element.id}>
-          <img className="product-image" src={element.image} alt="" />
-          <div className="product-details">
-            <div className="product-name">{element.name}</div>
-            <div className="product-category">{t("Category:")}{element.category}</div>
-            <div className="product-description">{element.description}</div>
-            <div className="product-price">{t("Price:")} ${element.price}</div>
-            <div className="product-activity">{t("Product is available")}{element.active}</div>
-            <button onClick={() => handleClick(element.id)} className="more-info-btn">More info about this product</button>
-            <button onClick={() => addToCart(element)} className="add-to-cart-btn">Add to Cart</button>
+      <div className="webshop-container">
+
+        <ToastContainer />
+        {products.map((element) => (
+
+          <div className="product-card" key={element.id}>
+            <div className="p-category">{t("Category:")}{element.category}</div>
+            <img className="p-image" src={element.image} alt="" />
+            <div className="p-name">{element.name}</div>
+            <dd className="p-description">{element.description}</dd>
+            <div className="p-price">{t("Price:")} ${element.price}</div>
+            <div className="p-availability">{t("Product is available")}{element.active}</div>
+            <button onClick={() => handleClick(element.id)} className="p-info">{t("Product information")}</button>            <button onClick={() => addToCart(element)} className="p-add-cart">{t("Add to Cart")}</button>
           </div>
-        </div>
-      ))}
-    </div>
+        ))
+        }
+      </div>
+    </div >
   );
 }
 export default Homepage;

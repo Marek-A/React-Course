@@ -53,7 +53,7 @@ function MaintainProducts() {
       <div>{products.length} products</div>
 
       {products.map((element, index) => (
-        <div keys={element.id} className={element.active === true ? "active" : "inactive"}>
+        <div keys={element.id} className={element.active === true ? "activex" : "inactivex"}>
           <img src={element.image} alt="" />
           <div>{element.id}</div>
           <div>{element.name}</div>

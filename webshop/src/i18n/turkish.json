@@ -1,0 +1,23 @@
+{
+  "translation": {
+    "admin": "Yönetici görünümü",
+    "cart": "Alışveriş sepeti",
+    "shops": "Mağazalar",
+    "contact": "İletişim",
+    "added-to-cart": "Ürün sepete eklendi!",
+    "Empty the cart": "Alışveriş sepetini boşalt",
+    "Cart price:": "Sepet fiyatı:",
+    "Shopping cart is empty": "Alışveriş sepeti boş",
+    "Add product": "Ürün ekle",
+    "Maintain products": "Ürünleri bakımını yap",
+    "unique products": "özel ürünler",
+    "quantity-of-products": "adet",
+    "Product ID:": "ID: ",
+    "Product name:": "Ürün adı: ",
+    "Price:": "Fiyat: ",
+    "Category:": "Kategori: ",
+    "Description:": "Açıklama: ",
+    "Product is available": "Ürün stokta mevcut",
+    "Settings": "Ayarlar"
+  }
+}
