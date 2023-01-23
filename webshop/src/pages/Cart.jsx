@@ -14,6 +14,8 @@ function Cart() {
   const [DbparcelMachines, setDbParcelMachines] = useState([]); //search function
   //------------------------------------------------------- cartSumCtx below
   const cartSumCtx = useContext(CartSumContext);
+  // localStorages saan toodete hinda muuta 
+  // lahendus võtame kõik tooted fetch abil ja võtame hinnad ka sealt, võttes localstoragest id'd 
   //-------------------------------------------------------
   const [isLoading, setLoading] = useState(true);
   const searchedRef = useRef();

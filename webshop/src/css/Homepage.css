@@ -14,7 +14,7 @@
     width: 345px;
     height: 600px;
     margin: 40px;
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(85, 73, 65);
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -47,7 +47,7 @@
 .p-category {
     padding: 1px 100px;
     margin: 10px;
-    background-color: rgb(255, 255, 255);
+
 }
 
 .p-price {

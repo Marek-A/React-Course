@@ -102,7 +102,7 @@ function Homepage() {
       <div> {products.length}{t(" products on display")}</div>
       <div className="filter-container">
         {categories.map(element =>
-          <Button variant="warning" onClick={() => filterByCategory(element)}>{element}</Button>)}
+          <Button key={element.name} variant="warning" onClick={() => filterByCategory(element)}>{element}</Button>)}
 
         <DropdownButton variant="success" title="Filter products">
           <Dropdown.Menu>
@@ -119,7 +119,7 @@ function Homepage() {
       <div className="webshop-container">
 
         <ToastContainer />
-        {products.map((element) => (
+        {products.map((element) =>
 
           <div className="product-card" key={element.id}>
             <div className="p-category">{t("Category:")}{element.category}</div>
@@ -130,7 +130,7 @@ function Homepage() {
             <div className="p-availability">{t("Product is available")}{element.active}</div>
             <button onClick={() => handleClick(element.id)} className="p-info">{t("Product information")}</button>            <button onClick={() => addToCart(element)} className="p-add-cart">{t("Add to Cart")}</button>
           </div>
-        ))
+        )
         }
       </div>
     </div >

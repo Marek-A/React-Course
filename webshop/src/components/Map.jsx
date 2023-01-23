@@ -35,7 +35,7 @@ function Map(props) {
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
                 {shops.map(element =>
-                    <Marker position={[element.longitude, element.latitude]}>
+                    <Marker key={element.name} position={[element.longitude, element.latitude]}>
                         <Popup>
                             {element.name}. <br /> Open time {element.openTime}-{element.closingTime}
                         </Popup>
