@@ -53,16 +53,16 @@ function NavigationBar() {
                     <Nav.Link className="navbar-x" as={Link} to="/contact">
                         {t("contact")}
                     </Nav.Link>
-                    {authCtx.loggedIn === true && <Nav.Link as={Link} to="/admin">
+                    {authCtx.loggedIn === true && <Nav.Link className="navbar-x" as={Link} to="/admin">
                         {t("admin")}
                     </Nav.Link>}
-                    {authCtx.loggedIn === false && <Nav.Link as={Link} to="/login">
+                    {authCtx.loggedIn === false && <Nav.Link className="navbar-x" as={Link} to="/login">
                         Log In
                     </Nav.Link>}
-                    {authCtx.loggedIn === false && <Nav.Link as={Link} to="/signup">
+                    {authCtx.loggedIn === false && <Nav.Link className="navbar-x" as={Link} to="/signup">
                         Sign UP
                     </Nav.Link>}
-                    {authCtx.loggedIn === true && <Nav.Link onClick={logout}>
+                    {authCtx.loggedIn === true && <Nav.Link className="navbar-x" onClick={logout}>
                         Log Out
                     </Nav.Link>}
                 </Nav>

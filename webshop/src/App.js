@@ -68,14 +68,7 @@ function App() {
           </>
         )}
 
-        <Route
-          path="*"
-          element={
-            <div>
-              KeyLogger installed, thank you for your crypto wallet! Go cry now!
-            </div>
-          }
-        />
+        <Route path="*" element={<div>Sign UP function disabled!</div>} />
       </Routes>
     </div>
   );

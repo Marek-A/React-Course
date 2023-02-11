@@ -5,11 +5,11 @@ import { useNavigate } from "react-router"
 import { useContext, useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import Spinner from 'react-bootstrap/Spinner';
-import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Button from 'react-bootstrap/Button';
 import CartSumContext from "../store/CartSumContext";
 import CarouselGallery from "../components/home/CarouselGallery";
+import DropdownMenu from "react-bootstrap/esm/DropdownMenu";
 
 
 function Homepage() {
@@ -99,20 +99,20 @@ function Homepage() {
   return (
     <div>
       <CarouselGallery />
-      <div> {products.length}{t(" products on display")}</div>
-      <div className="filter-container">
-        {categories.map(element =>
-          <Button key={element.name} variant="warning" onClick={() => filterByCategory(element)}>{element}</Button>)}
+      <div id="productamount"> {products.length}{t(" products on display")}</div>
+      <div id="filter-container">
 
-        <DropdownButton variant="success" title="Filter products">
-          <Dropdown.Menu>
-            <button onClick={resetFilters}>{t("Reset Filters")}</button>
-            <button onClick={() => { setSort("A-Z"); sortProducts(); }}>{t("Sort A-Z")}</button>
-            <button onClick={() => { setSort("Z-A"); sortProducts(); }}>{t("Sort Z-A")}</button>
-            <button onClick={() => { setSort("Price increasing"); sortProducts(); }}>{t("Sort Price Increasing")}</button>
-            <button onClick={() => { setSort("Price decreasing"); sortProducts(); }}>{t("Sort Price Decreasing")}</button>
-            <button onClick={showAllProducts}>{t("Show All Products")}</button>
-          </Dropdown.Menu>
+        {categories.map(element =>
+          <Button id="categorybutton" key={element.name} variant="warning" onClick={() => filterByCategory(element)}>{element}</Button>)}
+        <DropdownButton id="dropdown" variant="success" title="Filter products">
+          <DropdownMenu id="dropdownmenu">
+            <Button id="dropbutton" variant="dark" onClick={showAllProducts}>{t("Show All Products")}</Button>
+            <Button id="dropbutton" variant="dark" onClick={() => { setSort("A-Z"); sortProducts(); }}>{t("Sort A-Z")}</Button>
+            <Button id="dropbutton" variant="dark" onClick={() => { setSort("Z-A"); sortProducts(); }}>{t("Sort Z-A")}</Button>
+            <Button id="dropbutton" variant="dark" onClick={() => { setSort("Price increasing"); sortProducts(); }}>{t("Sort Price Increasing")}</Button>
+            <Button id="dropbutton" variant="dark" onClick={() => { setSort("Price decreasing"); sortProducts(); }}>{t("Sort Price Decreasing")}</Button>
+            <Button id="dropbutton" variant="warning" onClick={resetFilters}>{t("Reset Filters")}</Button>
+          </DropdownMenu>
         </DropdownButton>
       </div>
 

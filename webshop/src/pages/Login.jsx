@@ -1,9 +1,9 @@
-
+import '../css/Login.css'
 import { useContext } from "react";
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../store/AuthContext";
-
+import Button from 'react-bootstrap/Button';
 
 function Login() {
     const emailRef = useRef();
@@ -33,12 +33,15 @@ function Login() {
     }
     return (
         <div>
-            <div>{message}</div>
-            <label>E-mail</label> <br />
-            <input ref={emailRef} type="text" /> <br />
-            <label>Password</label> <br />
-            <input ref={passwordRef} type="text" /> <br />
-            <button onClick={login}>Login</button>
-        </div>);
+            <div id="login-container">
+                <label id="log-lab">E-mail</label> <br />
+                <input ref={emailRef} type="text" /> <br />
+                <label id="log-lab">Password</label> <br />
+                <input ref={passwordRef} type="password" /> <br />
+                <Button id="login-button" onClick={login}>Login</Button>
+                <div id="message-warning">{message}</div>
+            </div>
+        </div>
+    );
 }
 export default Login;

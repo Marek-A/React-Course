@@ -1,4 +1,4 @@
-
+import '../css/Shops.css'
 import L from 'leaflet';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import icon from '../css/pin.png';
@@ -10,9 +10,9 @@ import config from "../data/config.json";
 let DefaultIcon = L.icon({
     iconUrl: icon,
     shadowUrl: iconShadow,
-    iconSize: [25, 41],
-    iconAnchor: [12, 41],
-    popupAnchor: [2, -40],
+    iconSize: [50, 50],
+    iconAnchor: [15, 30],
+    popupAnchor: [10, -40],
 });
 L.Marker.prototype.options.icon = DefaultIcon;
 
@@ -28,19 +28,21 @@ function Map(props) {
 
     return (
         <div>
-            <MapContainer className='map' center={props.mapCoordinaates.lngLat} zoom={props.mapCoordinaates.zoom} scrollWheelZoom={false}>
-                <ChangeView center={props.mapCoordinaates.lngLat} zoom={props.mapCoordinaates.zoom} />
-                <TileLayer
-                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                />
-                {shops.map(element =>
-                    <Marker key={element.name} position={[element.longitude, element.latitude]}>
-                        <Popup>
-                            {element.name}. <br /> Open time {element.openTime}-{element.closingTime}
-                        </Popup>
-                    </Marker>)}
-            </MapContainer>
+            <div className="map-container">
+                <MapContainer className='map' center={props.mapCoordinaates.lngLat} zoom={props.mapCoordinaates.zoom} scrollWheelZoom={false}>
+                    <ChangeView center={props.mapCoordinaates.lngLat} zoom={props.mapCoordinaates.zoom} />
+                    <TileLayer
+                        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    />
+                    {shops.map(element =>
+                        <Marker key={element.name} position={[element.longitude, element.latitude]}>
+                            <Popup>
+                                {element.name}. <br /> Open time {element.openTime}-{element.closingTime}
+                            </Popup>
+                        </Marker>)}
+                </MapContainer>
+            </div>
         </div>)
 }
 
