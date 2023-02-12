@@ -1,0 +1,154 @@
+html,
+body {
+    height: 100%;
+    width: 100%;
+    background-color: rgb(21, 21, 21);
+}
+
+/* ---------------------- */
+#lang {
+    height: 40px;
+    width: 40px;
+}
+
+#lang:hover {
+    border: 1px rgba(43, 145, 182, 0) solid;
+    border-radius: 10%;
+    cursor: pointer;
+}
+
+#logo {
+    height: 40px;
+    width: 40px;
+}
+
+#logo:hover {
+    border: 1px rgba(232, 232, 232, 0) solid;
+    border-radius: 10%;
+    cursor: pointer;
+}
+
+/* ---------------------- */
+.sticky-top {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0);
+    backdrop-filter: blur(5px);
+    box-shadow: 0 5px 15px rgba(17, 17, 17, 0.108);
+    z-index: 1;
+
+}
+
+/* ---------------------- */
+.body-container {
+    background-color: rgb(21, 21, 21);
+    background-image: url("/src/assets/img/hello.png");
+    background-position-x: 200px;
+    background-position-y: 600px;
+    background-repeat: no-repeat;
+
+}
+
+/* ---------------------- */
+#myBtn {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 30px;
+    z-index: 99;
+    cursor: pointer;
+    padding: 15px;
+    border: 1px solid rgba(46, 235, 235, 0);
+    border-radius: 4%;
+    background-color: rgb(125, 247, 247);
+
+}
+
+#myBtn:hover {
+    box-shadow: 2px 5px 5px #b3d6c65f;
+    border: 1px solid rgba(46, 235, 235, 0);
+    border-radius: 4%;
+    background-color: rgb(46, 235, 235);
+    font-weight: 400;
+
+}
+
+/* ---------------------- */
+#container {
+    justify-content: space-between;
+
+}
+
+#navlink {
+
+    display: inline-block;
+    width: 250px;
+    text-align: center;
+    border: 0px solid black;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 900;
+    font-size: larger;
+    color: rgb(255, 255, 255);
+    text-align: left;
+    cursor: pointer;
+}
+
+#navlink:hover {
+    color: rgb(165, 233, 235);
+    cursor: pointer;
+
+}
+
+#navlink:active {
+    font-weight: 900;
+    color: rgb(113, 180, 208);
+    cursor: pointer;
+}
+
+/* ---------------------- */
+.myhomepage {
+    height: 100vh;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    background-color: rgba(21, 21, 21, 0.799);
+
+}
+
+.myabout {
+    height: 100vh;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    background-color: rgba(21, 21, 21, 0.799);
+}
+
+.myportfolio {
+    height: 100vh;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    background-color: rgba(21, 21, 21, 0.799);
+
+}
+
+.mycontact {
+    height: 100vh;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    background-color: rgba(21, 21, 21, 0.799);
+    background-image: url("/src/assets/img/hello.png");
+    background-position-x: 800px;
+    background-position-y: 600px;
+    background-repeat: no-repeat;
+    background-blend-mode: darken;
+
+}
+
+/* ---------------------- */
