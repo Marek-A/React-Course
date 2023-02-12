@@ -19,7 +19,7 @@ function MyPortfolio({ r1 }) {
                     <img onClick={handleClick} src={website1} alt="Website 1 Thumbnail" />
                     <div className="portfolio-item-info">
                         <h4>Webshop</h4>
-                        <p>Military & hiking gear online store - built for coding project purposes</p>
+                        <p>Military & Hiking gear online store - built for coding project purposes</p>
                     </div>
                 </div>
                 <div className="portfolio-item">
