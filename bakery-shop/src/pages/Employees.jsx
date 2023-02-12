@@ -1,5 +1,5 @@
-import { Button, Table } from "react-bootstrap";
 import { useState, useEffect } from "react";
+import { Button, Table } from "react-bootstrap";
 import validator from 'validator';
 import "../css/Employees.css";
 
@@ -8,7 +8,7 @@ function Employees() {
 
     useEffect(() => {
         fetch('https://reqres.in/api/users')
-            .then(response => response.json())
+            .then(res => res.json())
             .then(data => setEmployees(data.data))
     }, []);
 
@@ -58,22 +58,22 @@ function Employees() {
                         <th scope="col">ID</th>
                         <th scope="col">Name</th>
                         <th scope="col">Email</th>
-                        <th scope="col">Avatar</th>
+                        <th id="avatar" scope="col">Avatar</th>
                         <th scope="col">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {employees.map((employee, index) => (
-                        <tr key={index}>
-                            <td>{employee.id}</td>
-                            <td>{employee.first_name} {employee.last_name}</td>
-                            <td>{employee.email}</td>
-                            <td><img src={employee.avatar} className="form-control" alt="Avatar" /></td>
-                            <td>
-                                <Button type="button" variant="danger" onClick={() => deleteEmployee(index)}>Delete</Button>
-                            </td>
-                        </tr>
-                    ))}
+                    {employees
+                        .map((employee, index) => (
+                            <tr key={index}>
+                                <td>{employee.id}</td>
+                                <td>{employee.first_name} {employee.last_name}</td>
+                                <td>{employee.email}</td>
+                                <td><img src={employee.avatar} className="form-control" alt="Avatar" /></td>
+                                <td>
+                                    <Button type="button" variant="danger" onClick={() => deleteEmployee(index)}>Delete</Button>
+                                </td>
+                            </tr>))}
                 </tbody>
             </Table>
             <form className="form" onSubmit={addEmployee}>
